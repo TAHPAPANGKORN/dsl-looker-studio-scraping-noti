@@ -1,5 +1,6 @@
 from datetime import datetime
 import logging
+import re
 import time
 from typing import Any, Dict, Optional
 from playwright.sync_api import sync_playwright, Page, Browser, Playwright
@@ -96,8 +97,9 @@ class LookerScraper:
                 
                 if cd_name in CLASS_FIELD_MAP:
                     field_name = CLASS_FIELD_MAP[cd_name]
-                    text_content = table.text_content().strip()
-                    cleaned_value = text_content.replace("ไม่มีข้อมูล", "").replace("No data-", "").replace("No data", "").strip()
+                    text_content = table.text_content() or ""
+                    normalized_text = re.sub(r'\s+', ' ', text_content).strip()
+                    cleaned_value = normalized_text.replace("ไม่มีข้อมูล", "").replace("No data-", "").replace("No data", "").strip()
                     extracted_data[field_name] = cleaned_value
             except Exception as e:
                 logger.error(f"Error reading simple-table cell elements: {e}")

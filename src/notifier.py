@@ -22,9 +22,10 @@ class EmailNotifier:
         if not text or text == "-":
             return []
             
-        text = text.replace("ไม่มีข้อมูล", "").replace("No data-", "").replace("No data", "").strip()
+        normalized_text = re.sub(r'\s+', ' ', text).strip()
+        normalized_text = normalized_text.replace("ไม่มีข้อมูล", "").replace("No data-", "").replace("No data", "").strip()
         pattern = r"(รายการแก้ไข\s*(?:\(\d+\))?(?:\s*\d+)?)"
-        parts = re.split(pattern, text)
+        parts = re.split(pattern, normalized_text)
         
         pairs: List[Tuple[str, str]] = []
         current_key = None
@@ -61,7 +62,7 @@ class EmailNotifier:
         """Normalizes missing values for visualization."""
         if val is None:
             return "-"
-        val_str = str(val).strip()
+        val_str = re.sub(r'\s+', ' ', str(val)).strip()
         if not val_str or val_str in ["ไม่มีข้อมูล", "No data-", "No data", "-"]:
             return "-"
         return val_str

@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 import logging
 from pathlib import Path
+import re
 from typing import Any, Dict, Optional
 from src.models import CLASS_FIELD_MAP
 
@@ -39,7 +40,7 @@ class StateManager:
         """Normalizes status values to strip whitespace and treat equivalent empty values equally."""
         if v is None:
             return ""
-        v_str = str(v).strip()
+        v_str = re.sub(r'\s+', ' ', str(v)).strip()
         if v_str in ["", "-", "ไม่มีข้อมูล", "No data-", "No data"]:
             return ""
         return v_str
