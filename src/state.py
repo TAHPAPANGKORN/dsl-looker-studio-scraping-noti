@@ -40,7 +40,7 @@ class StateManager:
         if v is None:
             return ""
         v_str = str(v).strip()
-        if v_str in ["", "-", "ไม่มีข้อมูล"]:
+        if v_str in ["", "-", "ไม่มีข้อมูล", "No data-", "No data"]:
             return ""
         return v_str
 

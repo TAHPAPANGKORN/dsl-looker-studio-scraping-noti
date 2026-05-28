@@ -97,7 +97,7 @@ class LookerScraper:
                 if cd_name in CLASS_FIELD_MAP:
                     field_name = CLASS_FIELD_MAP[cd_name]
                     text_content = table.text_content().strip()
-                    cleaned_value = text_content.replace("ไม่มีข้อมูล", "").strip()
+                    cleaned_value = text_content.replace("ไม่มีข้อมูล", "").replace("No data-", "").replace("No data", "").strip()
                     extracted_data[field_name] = cleaned_value
             except Exception as e:
                 logger.error(f"Error reading simple-table cell elements: {e}")
