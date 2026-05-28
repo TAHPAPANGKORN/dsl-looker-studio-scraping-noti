@@ -1,0 +1,64 @@
+name: Looker Studio Tracker
+
+on:
+  schedule:
+    # Runs every 2 hours between 08:00 - 22:00 Thailand Time (UTC+7 => 01:00 - 15:00 UTC)
+    - cron: '0 1-15/2 * * *'
+  workflow_dispatch: # Allows manual trigger from the GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  run-tracker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch all history to prevent push errors
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Chromium & System Dependencies
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Run Looker Studio Tracker
+        env:
+          # Configuration for users (optional JSON string to keep secrets secure)
+          # If not set, the script will fall back to using users.json in the repo
+          USERS_CONFIG: ${{ secrets.USERS_CONFIG }}
+          GOOGLE_SHEET_CSV_URL: ${{ secrets.GOOGLE_SHEET_CSV_URL }}
+          
+          # SMTP Configuration
+          SMTP_SERVER: "smtp.gmail.com"
+          SMTP_PORT: "587"
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+        run: |
+          python tracker.py
+
+      - name: Commit and Push state.json if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          # Check if there are changes before committing to avoid failure
+          if ! git diff --quiet state.json; then
+            git commit -m "Auto-update state.json [skip ci]"
+            git push origin HEAD:${{ github.ref }}
+          else
+            echo "No status changes to commit."
+          fi
