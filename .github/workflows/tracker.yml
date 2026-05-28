@@ -59,6 +59,7 @@ jobs:
           if ! git diff --quiet state.json; then
             git add state.json
             git commit -m "Auto-update state.json [skip ci]"
+            git pull --rebase origin ${{ github.ref_name }}
             git push origin HEAD:${{ github.ref }}
           else
             echo "No status changes to commit."
