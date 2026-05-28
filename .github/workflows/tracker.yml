@@ -41,6 +41,7 @@ jobs:
           # If not set, the script will fall back to using users.json in the repo
           USERS_CONFIG: ${{ secrets.USERS_CONFIG }}
           GOOGLE_SHEET_CSV_URL: ${{ secrets.GOOGLE_SHEET_CSV_URL }}
+          LOOKER_STUDIO_URL: "https://datastudio.google.com/u/0/reporting/8a4c4d64-1bd1-4866-95c6-265189ee53af/page/DlByD"
           
           # SMTP Configuration
           SMTP_SERVER: "smtp.gmail.com"
