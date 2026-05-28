@@ -26,6 +26,9 @@ class UserLoader:
             try:
                 users = json.loads(self.config.users_config_json)
                 if isinstance(users, list):
+                    for u in users:
+                        if not u.get("url") and self.config.looker_studio_url:
+                            u["url"] = self.config.looker_studio_url
                     return users
             except Exception as e:
                 logger.error(f"Failed to parse USERS_CONFIG JSON environment variable: {e}")
@@ -36,6 +39,9 @@ class UserLoader:
                 with open(self.config.users_file, "r", encoding="utf-8") as f:
                     users = json.load(f)
                     if isinstance(users, list):
+                        for u in users:
+                            if not u.get("url") and self.config.looker_studio_url:
+                                u["url"] = self.config.looker_studio_url
                         return users
             except Exception as e:
                 logger.error(f"Failed to read local users file {self.config.users_file}: {e}")
@@ -65,6 +71,10 @@ class UserLoader:
                 url = get_val(row, ["looker", "url", "ลิงก์", "link"])
                 student_id = get_val(row, ["รหัส", "student_id", "student id"])
                 
+                # Apply fallback Looker URL if missing in spreadsheet row
+                if not url and self.config.looker_studio_url:
+                    url = self.config.looker_studio_url
+                    
                 if not email or not url:
                     logger.warning(f"Row {idx + 1} skipped due to missing email or Looker Studio URL.")
                     continue

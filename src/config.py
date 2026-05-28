@@ -20,6 +20,9 @@ class AppConfig:
     sender_email: Optional[str] = os.environ.get("SENDER_EMAIL")
     sender_password: Optional[str] = os.environ.get("SENDER_PASSWORD")
     
+    # Global Looker Studio Dashboard URL (Fallback)
+    looker_studio_url: Optional[str] = os.environ.get("LOOKER_STUDIO_URL")
+    
     # Google Sheet URL (alternative source for user lists)
     google_sheet_csv_url: Optional[str] = os.environ.get("GOOGLE_SHEET_CSV_URL")
     
@@ -33,3 +36,5 @@ class AppConfig:
         if self.sender_password:
             cleaned_pwd = self.sender_password.strip().replace(" ", "")
             object.__setattr__(self, "sender_password", cleaned_pwd)
+        if self.looker_studio_url:
+            object.__setattr__(self, "looker_studio_url", self.looker_studio_url.strip())
