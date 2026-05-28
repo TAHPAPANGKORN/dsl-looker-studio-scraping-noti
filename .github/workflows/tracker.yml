@@ -55,9 +55,9 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state.json
           # Check if there are changes before committing to avoid failure
           if ! git diff --quiet state.json; then
+            git add state.json
             git commit -m "Auto-update state.json [skip ci]"
             git push origin HEAD:${{ github.ref }}
           else
