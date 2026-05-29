@@ -1,10 +1,7 @@
 name: Looker Studio Tracker
 
 on:
-  schedule:
-    # Runs every 2 hours between 08:00 - 22:00 Thailand Time (UTC+7 => 01:00 - 15:00 UTC)
-    - cron: '25 1-15/2 * * *'
-  workflow_dispatch: # Allows manual trigger from the GitHub UI
+  workflow_dispatch: 
 
 permissions:
   contents: write
