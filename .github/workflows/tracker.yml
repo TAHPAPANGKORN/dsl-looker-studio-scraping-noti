@@ -3,7 +3,7 @@ name: Looker Studio Tracker
 on:
   schedule:
     # Runs every 2 hours between 08:00 - 22:00 Thailand Time (UTC+7 => 01:00 - 15:00 UTC)
-    - cron: '0 1-15/2 * * *'
+    - cron: '25 1-15/2 * * *'
   workflow_dispatch: # Allows manual trigger from the GitHub UI
 
 permissions:
@@ -17,6 +17,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.ref_name }}
           # Fetch all history to prevent push errors
           fetch-depth: 0
 
