@@ -68,8 +68,8 @@ class LookerScraper:
             target_input = inputs.first
             try:
                 target_input.click()
-                target_input.fill("")
-                target_input.type(student_id)
+                # Clear and fill the input reliably
+                target_input.fill(student_id)
                 time.sleep(1)
                 target_input.press("Enter")
                 logger.info("Student ID filter applied. Waiting for data refresh (10s)...")

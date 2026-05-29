@@ -63,6 +63,17 @@ def run_pipeline(args: argparse.Namespace) -> None:
                 user_state = state.get(user_id, {})
                 last_known_status = user_state.get("last_known_status")
                 
+                # Fallback profile details if scraper failed to extract them or returned empty values
+                for field, config_val in [("student_name", name), ("student_id", student_id), ("borrower_type", None)]:
+                    val = current_status.get(field)
+                    if not val or val in ["", "-", "ไม่มีข้อมูล"]:
+                        if last_known_status and last_known_status.get(field):
+                            current_status[field] = last_known_status[field]
+                            logger.info(f"Recovered '{field}' from cache for student {name}")
+                        elif config_val:
+                            current_status[field] = config_val
+                            logger.info(f"Fell back '{field}' to config value for student {name}")
+                
                 # Check for changes in tracked fields
                 if state_manager.has_changes(last_known_status, current_status):
                     logger.info(f"Status update detected for {name}. Dispatching email notification...")
@@ -84,10 +95,12 @@ def run_pipeline(args: argparse.Namespace) -> None:
                         state_changed = True
                 else:
                     logger.info(f"No updates detected for {name}. Current status matches cache.")
-                    # Update last checked timestamp
-                    if user_id in state:
-                        state[user_id]["last_checked"] = datetime.now().isoformat()
-                        state_changed = True
+                    # Update last checked timestamp and ensure status cache is kept up-to-date
+                    state[user_id] = {
+                        "last_known_status": current_status,
+                        "last_checked": datetime.now().isoformat()
+                    }
+                    state_changed = True
                         
             except Exception as e:
                 logger.error(f"Error checking tracking status for student {name}: {e}", exc_info=True)

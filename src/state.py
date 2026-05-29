@@ -50,7 +50,12 @@ class StateManager:
         if not old_status or not isinstance(old_status, dict):
             return True
             
+        # Ignore static profile fields to prevent false alarms due to transient scraping glitches
+        ignored_fields = {"student_name", "student_id", "borrower_type"}
+        
         for k in CLASS_FIELD_MAP.values():
+            if k in ignored_fields:
+                continue
             old_val = self.normalize_value(old_status.get(k))
             new_val = self.normalize_value(new_status.get(k))
             if old_val != new_val:
