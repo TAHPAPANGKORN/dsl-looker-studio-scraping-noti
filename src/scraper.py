@@ -32,8 +32,10 @@ class LookerScraper:
         if self._playwright:
             self._playwright.stop()
 
-    def scrape(self, url: str, student_id: str) -> Dict[str, Any]:
-        """Navigates to Looker Studio URL in a new context, filters, and extracts status values."""
+    def scrape(self, url: str, student_id: str) -> Optional[Dict[str, Any]]:
+        """Navigates to Looker Studio URL in a new context, filters, and extracts status values.
+        Supports up to 2 retries if rendering errors are detected.
+        """
         if not self.browser:
             raise RuntimeError("Scraper must be used as a context manager (with LookerScraper() as scraper).")
             
@@ -47,15 +49,38 @@ class LookerScraper:
         page: Page = context.new_page()
         
         try:
-            page.goto(url, wait_until="load")
-            logger.info("Waiting for dashboard component assets to mount (10s)...")
-            time.sleep(10)
-            
-            if student_id:
-                self._apply_student_filter(page, student_id)
-                
-            data = self._extract_table_data(page)
-            return data
+            max_retries = 2
+            for attempt in range(max_retries + 1):
+                try:
+                    if attempt > 0:
+                        logger.warning(f"Retrying scraping for student {student_id} (Attempt {attempt}/{max_retries})...")
+                        # Reload page
+                        page.reload(wait_until="load")
+                    else:
+                        page.goto(url, wait_until="load")
+                    
+                    logger.info("Waiting for dashboard component assets to mount (15s)...")
+                    time.sleep(15)
+                    
+                    if student_id:
+                        self._apply_student_filter(page, student_id)
+                        
+                    data = self._extract_table_data(page)
+                    
+                    # Check for rendering errors in data
+                    if self._has_rendering_errors(data):
+                        logger.warning(f"Looker Studio rendering errors detected in extracted data on attempt {attempt}.")
+                        if attempt < max_retries:
+                            continue
+                        else:
+                            logger.error(f"Failed to scrape student {student_id} after {max_retries} retries due to persistent rendering errors.")
+                            return None
+                    
+                    return data
+                except Exception as e:
+                    logger.error(f"Error during scrape attempt {attempt} for student {student_id}: {e}", exc_info=True)
+                    if attempt >= max_retries:
+                        return None
         finally:
             context.close()
 
@@ -72,8 +97,8 @@ class LookerScraper:
                 target_input.fill(student_id)
                 time.sleep(1)
                 target_input.press("Enter")
-                logger.info("Student ID filter applied. Waiting for data refresh (10s)...")
-                time.sleep(10)
+                logger.info("Student ID filter applied. Waiting for data refresh (12s)...")
+                time.sleep(12)
             except Exception as e:
                 logger.warning(f"Failed to enter student ID in looker text input: {e}")
         else:
@@ -105,3 +130,25 @@ class LookerScraper:
                 logger.error(f"Error reading simple-table cell elements: {e}")
                 
         return extracted_data
+
+    def _has_rendering_errors(self, data: Dict[str, str]) -> bool:
+        """Checks if any extracted value contains Looker Studio rendering error keywords."""
+        error_keywords = [
+            "invalid dimension",
+            "this chart has an invalid dimension",
+            "see details",
+            "system error",
+            "encountered a system error",
+            "the server encountered an error"
+        ]
+        if not data:
+            return False
+            
+        for key, value in data.items():
+            val_lower = str(value).lower()
+            for keyword in error_keywords:
+                if keyword in val_lower:
+                    logger.warning(f"Found error keyword '{keyword}' in field '{key}': '{value}'")
+                    return True
+        return False
+
