@@ -44,14 +44,14 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-18T17:04:13.873087"
+    "last_checked": "2026-07-19T05:04:11.492009"
   },
   "67160236": {
     "last_known_status": {
-      "loan_doc_status": "✅ เอกสารถูกต้องครบถ้วน ประเภทผู้กู้รายเก่า (ต่อเนื่อง ม.บูรพา) เตรียมทำแบบเบิกเงิน เทอม 1/2569",
-      "loan_doc_date": "27/6/2026",
-      "step_1_status": "✅ ลงทะเบียนรับไม่เกิน 7 วัน นับจากวันที่ส่ง ✅ มหาวิทยาลัยตรวจสอบนับจากวันที่ส่งเอกสารไม่เกิน 14 วัน",
-      "step_2_status": "✅ ผ่านการตรวจสอบแล้ว รอเตรียมนำส่งส่งธนาคาร",
+      "loan_doc_status": "",
+      "loan_doc_date": "",
+      "step_1_status": "",
+      "step_2_status": "",
       "step_2_correct_before": "",
       "step_2_correct_docs": "",
       "step_5_status": "",
@@ -62,14 +62,14 @@
       "step_3_status": "",
       "step_4_date": "",
       "step_3_delivery_num": "",
-      "app_doc_intake_status": "✅ ลงทะเบียนรับไม่เกิน 7 วัน นับจากวันที่ส่ง ✅ มหาวิทยาลัยตรวจสอบนับจากวันที่ส่งเอกสารไม่เกิน 14 วัน",
-      "app_doc_correct_docs": "❌ มีการแก้ไขเอกสาร",
+      "app_doc_intake_status": "",
+      "app_doc_correct_docs": "",
       "step_3_delivery_date": "",
-      "step_1_date": "1/7/2026",
-      "step_2_date": "13/07/2569",
-      "app_doc_correct_officer": "A3059 แก้ไขครั้งที่ 2",
-      "app_doc_corrections_list": "รายการแก้ไข (1) 1รายการแก้ไข (1) 2รายการแก้ไข (1) 3รายการแก้ไข (1) 4รายการแก้ไข (1) 5รายการแก้ไข (1) 6รายการแก้ไข (1) 7รายการแก้ไข (1) 8แก้ไขครั้งที่ 2 : ขาดกิจกรรมจิตอาสา 36 ชม. / แนบหลักฐานกิจกรรมจิตอาสาข้อมูลเอกสารฉบับจริงทั้งหมดที่นิสิตส่งให้ตรวจ Google Classroom ส่งเพิ่มเติมด้วยขาดกิจกรรมจิตอาสา 36 ชม.------",
-      "app_doc_correct_date": "24/6/2026",
+      "step_1_date": "",
+      "step_2_date": "",
+      "app_doc_correct_officer": "",
+      "app_doc_corrections_list": "รายการแก้ไข (1) 1รายการแก้ไข (1) 2รายการแก้ไข (1) 3รายการแก้ไข (1) 4รายการแก้ไข (1) 5รายการแก้ไข (1) 6รายการแก้ไข (1) 7รายการแก้ไข (1) 8-------",
+      "app_doc_correct_date": "",
       "step_3_date": "",
       "step_2_correct_date": "",
       "student_id": "67160236",
@@ -86,12 +86,12 @@
       "step_4_officer_seq": "",
       "step_4_corrected_date": "",
       "step_4_officer_date": "",
-      "app_doc_intake_date": "25/5/2026",
+      "app_doc_intake_date": "",
       "new_borrower_info": "",
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-18T17:02:09.663002"
+    "last_checked": "2026-07-19T05:02:07.556382"
   },
   "67430407": {
     "last_known_status": {
@@ -138,7 +138,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-18T17:02:40.730355"
+    "last_checked": "2026-07-19T05:02:38.496474"
   },
   "67160290": {
     "last_known_status": {
@@ -185,7 +185,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-18T17:03:11.859735"
+    "last_checked": "2026-07-19T05:03:09.584694"
   },
   "67160063": {
     "last_known_status": {
@@ -232,7 +232,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-18T17:03:42.851037"
+    "last_checked": "2026-07-19T05:03:40.551031"
   },
   "67050403": {
     "last_known_status": {
@@ -279,6 +279,6 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-18T17:04:47.453488"
+    "last_checked": "2026-07-19T05:04:42.419946"
   }
 }
