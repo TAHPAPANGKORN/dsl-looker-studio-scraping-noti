@@ -44,7 +44,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-30T05:04:15.373368"
+    "last_checked": "2026-07-30T17:04:01.522869"
   },
   "67160236": {
     "last_known_status": {
@@ -91,7 +91,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-30T05:02:09.376543"
+    "last_checked": "2026-07-30T17:01:57.228810"
   },
   "67430407": {
     "last_known_status": {
@@ -138,7 +138,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-30T05:02:40.491781"
+    "last_checked": "2026-07-30T17:02:28.382769"
   },
   "67160290": {
     "last_known_status": {
@@ -185,7 +185,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-30T05:03:11.569014"
+    "last_checked": "2026-07-30T17:02:59.404743"
   },
   "67160063": {
     "last_known_status": {
@@ -232,7 +232,7 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-30T05:03:42.647913"
+    "last_checked": "2026-07-30T17:03:30.420736"
   },
   "67050403": {
     "last_known_status": {
@@ -250,8 +250,8 @@
       "step_3_status": "✅ นำส่งธนาคารแล้ว",
       "step_4_date": "",
       "step_3_delivery_num": "KTB-2569001440100146",
-      "app_doc_intake_status": "✅ ลงทะเบียนรับไม่เกิน 7 วัน นับจากวันที่ส่ง ✅ มหาวิทยาลัยตรวจสอบนับจากวันที่ส่งเอกสารไม่เกิน 14 วัน",
-      "app_doc_correct_docs": "❌ มีการแก้ไขเอกสาร",
+      "app_doc_intake_status": "",
+      "app_doc_correct_docs": "",
       "step_3_delivery_date": "",
       "step_1_date": "16/7/2026",
       "step_2_date": "18/07/2026",
@@ -279,6 +279,6 @@
       "doc_seq_to_officer": "",
       "borrower_type": "ผู้กู้รายเก่า (ผู้กู้ต่อเนื่อง ม.บูรพา)"
     },
-    "last_checked": "2026-07-30T05:04:46.444149"
+    "last_checked": "2026-07-30T17:04:34.196742"
   }
 }
